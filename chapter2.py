@@ -1,10 +1,12 @@
 from collections import defaultdict
 from math import sqrt
+from matplotlib.pylab import norm
 import scipy.stats as  stats
 import pandas as pd
 import matplotlib.pyplot as plt
 import random as rd 
 import numpy as np
+from scipy.stats import norm
 
 def start_probability():
    p_coffe_drinker = 0.65
@@ -107,11 +109,32 @@ def plot_normal_dis():
    plt.show()
    print(stats.norm.pdf(x = 0))
 
-# def bio_dis():
-#    fair_coin_flips = stats.binom.rvs(n = 10, p = 0.5, size = 100_000)
-#    print(pd.crosstab(index = "counts", columns = fair_coin_flips))
-#    pd.DataFrame(fair_coin_flips).hist(range = (-0.5, 10.5), bins= 11)
-#    plt.
+
+
+def normal_dis_cdf():
+   mean = 64.43
+   std = 2.99
+   x = norm.cdf(x = mean, loc = mean, scale = std)
+   print(x)
+
+
+def z_scores(x, mean,std):
+   z = (x - mean ) / std;
+   return z
+
+def compare_2_houses():
+   first_house_z_score = z_scores(x = 150_000, mean = 140_000, std = 3000)
+   second_house_z_score = z_scores(x = 800_000, mean = 800_000, std = 10_000)
+
+   if abs(first_house_z_score) < abs(second_house_z_score):
+      print("first house is better")
+   elif abs(first_house_z_score) > abs(second_house_z_score):
+      print("second house is better")
+   else:      print("both are equally good")
+
+
+
 if __name__ == "__main__":
-   
+   z_scores(x = 67.42, mean = 64.43, std = 2.99)
+   compare_2_houses()
    
